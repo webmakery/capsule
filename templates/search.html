@@ -1,0 +1,95 @@
+<!-- wp:template-part {
+	"slug": "header"
+} /-->
+
+<!-- wp:pattern {
+	"slug": "capsule/mbf-breadcrumbs"
+} /-->
+
+<!-- wp:group {
+	"tagName": "main",
+	"metadata": {
+		"name": "Main"
+	},
+	"align": "wide",
+	"style": {
+		"spacing": {
+			"blockGap": "var:preset|spacing|140"
+		}
+	},
+	"layout": {
+		"type": "constrained",
+		"justifyContent": "center"
+	}
+} -->
+<main class="wp-block-group alignwide">
+  <!-- wp:group {
+  	"metadata": {
+  		"name": "Search Form"
+  	},
+  	"align": "wide",
+  	"style": {
+  		"spacing": {
+  			"blockGap": "var:preset|spacing|100",
+  			"margin": {
+  				"top": "var:preset|spacing|120",
+  				"bottom": "var:preset|spacing|130"
+  			}
+  		}
+  	},
+  	"layout": {
+  		"type": "constrained",
+  		"contentSize": "558px",
+  		"justifyContent": "left"
+  	}
+  } -->
+  <div
+    class="wp-block-group alignwide"
+    style="margin-top: var(--wp--preset--spacing--120); margin-bottom: var(--wp--preset--spacing--130)"
+  >
+    <!-- wp:query-title {
+	"type": "search",
+	"style": {
+		"typography": {
+			"textTransform": "uppercase"
+		}
+	}
+} /-->
+
+    <!-- wp:paragraph -->
+    <p
+      class="has-mbf-secondary-color has-text-color has-link-color has-medium-font-size"
+      style="margin-top: var(--wp--preset--spacing--30)"
+    >
+      Showing results based on your search. Browse the available items below.
+    </p>
+    <!-- /wp:paragraph -->
+
+    <!-- wp:search {
+	"label": "What are you looking for?",
+	"showLabel": false,
+	"placeholder": "Search",
+	"buttonText": "Search",
+	"metadata": {
+		"patternName": "capsule/mbf-search-form",
+		"name": "Search Form"
+	}
+} /-->
+  </div>
+  <!-- /wp:group -->
+
+  <!-- wp:pattern {
+  	"slug": "capsule/mbf-search-products"
+  } /-->
+  <!-- wp:pattern {
+  	"slug": "capsule/mbf-search-posts"
+  } /-->
+  <!-- wp:pattern {
+  	"slug": "capsule/mbf-search-pages"
+  } /-->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {
+	"slug": "footer"
+} /-->

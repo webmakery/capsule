@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "slug": "section-layout",
+  "title": "Layout Background",
+  "blockTypes": ["core/group", "core/columns", "core/column"],
+  "styles": {
+    "color": {
+      "background": "var(--mbf-color-layout-background)",
+      "text": "var(--mbf-color-primary)"
+    },
+    "blocks": {
+      "core/separator": {
+        "color": {
+          "text": "var(--mbf-color-border)"
+        }
+      },
+      "core/site-title": {
+        "color": {
+          "text": "var(--mbf-color-primary)"
+        }
+      },
+      "core/site-tagline": {
+        "color": {
+          "text": "var(--mbf-color-primary)"
+        }
+      }
+    },
+    "elements": {
+      "caption": {
+        "color": {
+          "text": "var(--mbf-color-primary)"
+        }
+      },
+      "heading": {
+        "color": {
+          "text": "var(--mbf-color-primary)"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var(--mbf-color-primary)"
+        }
+      }
+    }
+  }
+}

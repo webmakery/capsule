@@ -1,0 +1,78 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "slug": "section-secondary",
+  "title": "Secondary Background",
+  "blockTypes": ["core/group", "core/columns", "core/column"],
+  "styles": {
+    "color": {
+      "background": "var(--mbf-color-secondary)",
+      "text": "var(--mbf-color-secondary-contrast)"
+    },
+    "blocks": {
+      "core/separator": {
+        "color": {
+          "text": "var(--mbf-color-border)"
+        }
+      },
+      "core/site-title": {
+        "color": {
+          "text": "var(--mbf-color-secondary-contrast)"
+        }
+      },
+      "core/site-tagline": {
+        "color": {
+          "text": "var(--mbf-color-secondary-contrast)"
+        }
+      },
+      "core/navigation": {
+        "color": {
+          "text": "var(--mbf-color-secondary-contrast)"
+        }
+      },
+      "woocommerce/post-terms": {
+        "color": {
+          "text": "var(--mbf-color-secondary-contrast)"
+        }
+      },
+      "woocommerce/post-title": {
+        "color": {
+          "text": "var(--mbf-color-secondary-contrast)"
+        }
+      },
+      "woocommerce/product-price": {
+        "color": {
+          "text": "var(--mbf-color-secondary-contrast)"
+        }
+      }
+    },
+    "elements": {
+      "caption": {
+        "color": {
+          "text": "var(--mbf-color-secondary-contrast)"
+        }
+      },
+      "button": {
+        "color": {
+          "background": "var(--mbf-color-button-contrast)",
+          "text": "var(--mbf-color-button)"
+        },
+        ":hover": {
+          "color": {
+            "background": "color-mix(in srgb, var(--wp--preset--color--mbf-site-background) 85%, #000)"
+          }
+        }
+      },
+      "heading": {
+        "color": {
+          "text": "var(--mbf-color-secondary-contrast)"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var(--mbf-color-secondary-contrast)"
+        }
+      }
+    }
+  }
+}

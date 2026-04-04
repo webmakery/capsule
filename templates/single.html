@@ -1,0 +1,115 @@
+<!-- wp:template-part {
+	"slug": "header"
+} /-->
+
+<!-- wp:pattern {
+	"slug": "capsule/mbf-breadcrumbs"
+} /-->
+
+<!-- wp:group {
+	"tagName": "main",
+	"metadata": {
+		"name": "Main"
+	},
+	"style": {
+		"spacing": {
+			"blockGap": "0",
+			"margin": {
+				"top": "var:preset|spacing|120",
+				"bottom": "var:preset|spacing|160"
+			}
+		}
+	},
+	"layout": {
+		"type": "constrained"
+	}
+} -->
+<main
+  class="wp-block-group"
+  style="margin-top: var(--wp--preset--spacing--120); margin-bottom: var(--wp--preset--spacing--160)"
+>
+  <!-- wp:group {
+  	"lock": {
+  		"move": true,
+  		"remove": true
+  	},
+  	"metadata": {
+  		"name": "Content Container"
+  	},
+    "align":"wide",
+  	"style": {
+  		"spacing": {
+  			"blockGap": "var:preset|spacing|120"
+  		}
+  	},
+  	"layout": {
+  		"type": "constrained",
+  		"wideSize": "1215px",
+  		"contentSize": "1215px"
+  	}
+  } -->
+  <div class="wp-block-group alignwide">
+    <!-- wp:pattern {
+    	"slug": "capsule/mbf-single-standard-header"
+    } /-->
+
+    <!-- wp:post-content {
+    	"lock": {
+    		"move": true,
+    		"remove": true
+    	},
+    	"layout": {
+    		"type": "constrained",
+    		"contentSize": "694px",
+    		"wideSize": "1215px"
+    	}
+    } /-->
+
+    <!-- wp:pattern {
+    	"slug": "capsule/mbf-single-footer"
+    } /-->
+  </div>
+  <!-- /wp:group -->
+
+  <!-- wp:pattern {
+  	"slug": "capsule/mbf-single-post-comments"
+  } /-->
+
+  <!-- wp:group {
+  	"metadata": {
+  		"name": "Bottom Sections"
+  	},
+  	"align": "full",
+  	"style": {
+  		"spacing": {
+  			"blockGap": "var:preset|spacing|160",
+  			"margin": {
+  				"top": "var:preset|spacing|160",
+  				"bottom": "0"
+  			},
+  			"padding": {
+  				"top": "0",
+  				"bottom": "0"
+  			}
+  		}
+  	},
+  	"layout": {
+  		"type": "flex",
+  		"orientation": "vertical"
+  	}
+  } -->
+  <div
+    class="wp-block-group alignfull"
+    style="margin-top: var(--wp--preset--spacing--160); margin-bottom: 0; padding-top: 0; padding-bottom: 0"
+  >
+    <!-- wp:pattern {
+    	"slug": "capsule/mbf-post-carousel"
+    } /-->
+  </div>
+  <!-- /wp:group -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {
+	"slug": "footer"
+} /-->

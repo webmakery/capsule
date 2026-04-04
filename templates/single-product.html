@@ -1,0 +1,110 @@
+<!-- wp:template-part {
+	"slug": "header"
+} /-->
+
+<!-- wp:pattern {
+	"slug": "capsule/mbf-breadcrumbs"
+} /-->
+
+<!-- wp:group {
+	"tagName": "main",
+	"metadata": {
+		"name": "Main"
+	},
+	"style": {
+		"spacing": {
+			"padding": {
+				"top": "0",
+				"bottom": "0"
+			},
+			"margin": {
+				"top": "0",
+				"bottom": "0"
+			}
+		}
+	},
+	"layout": {
+		"inherit": true,
+		"type": "constrained"
+	}
+} -->
+<main class="wp-block-group" style="margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0">
+  <!-- wp:pattern {
+  	"slug": "capsule/mbf-single-product-standard"
+  } /-->
+
+  <!-- wp:group {
+  	"metadata": {
+  		"name": "Bottom Sections"
+  	},
+  	"align": "full",
+  	"style": {
+  		"spacing": {
+  			"blockGap": "var:preset|spacing|160",
+  			"margin": {
+  				"top": "var:preset|spacing|160",
+  				"bottom": "var:preset|spacing|160"
+  			},
+  			"padding": {
+  				"top": "0",
+  				"bottom": "0"
+  			}
+  		}
+  	},
+  	"layout": {
+  		"type": "flex",
+  		"orientation": "vertical"
+  	}
+  } -->
+  <div
+    class="wp-block-group alignfull"
+    style="
+      margin-top: var(--wp--preset--spacing--160);
+      margin-bottom: var(--wp--preset--spacing--160);
+      padding-top: 0;
+      padding-bottom: 0;
+    "
+  >
+    <!-- wp:pattern {
+    	"slug": "capsule/mbf-related-products-collection"
+    } /-->
+  </div>
+  <!-- /wp:group -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:group {
+	"metadata": {
+		"name": "Bottom Section"
+	},
+	"align": "full",
+	"style": {
+		"spacing": {
+			"blockGap": "var:preset|spacing|160",
+			"margin": {
+				"top": "var:preset|spacing|160",
+				"bottom": "var:preset|spacing|160"
+			}
+		}
+	},
+	"layout": {
+		"type": "flex",
+		"orientation": "vertical"
+	}
+} -->
+<div
+  class="wp-block-group alignfull"
+  style="margin-top: var(--wp--preset--spacing--160); margin-bottom: var(--wp--preset--spacing--160)"
+>
+  <!-- wp:pattern {
+  	"slug": "capsule/mbf-testimonials"
+  } /-->
+  <!-- wp:pattern {
+  	"slug": "capsule/mbf-split-banners"
+  } /-->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {
+	"slug": "footer"
+} /-->

@@ -1,0 +1,73 @@
+<!-- wp:template-part {
+	"slug": "header"
+} /-->
+
+<!-- wp:pattern {
+	"slug": "capsule/mbf-breadcrumbs"
+} /-->
+
+<!-- wp:group {
+	"tagName": "main",
+	"align": "wide",
+	"className": "is-style-default",
+	"style": {
+		"spacing": {
+			"padding": {
+				"top": "0",
+				"bottom": "0"
+			},
+			"margin": {
+				"top": "0",
+				"bottom": "0"
+			}
+		}
+	},
+	"layout": {
+		"type": "constrained"
+	}
+} -->
+<main
+  class="wp-block-group alignwide is-style-default"
+  style="margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0"
+>
+  <!-- wp:pattern {
+  	"slug": "capsule/mbf-product-catalog-header"
+  } /-->
+  <!-- wp:pattern {
+  	"slug": "capsule/mbf-product-catalog-grid"
+  } /-->
+
+  <!-- wp:group {
+  	"metadata": {
+  		"name": "Bottom Section"
+  	},
+  	"align": "full",
+  	"style": {
+  		"spacing": {
+  			"blockGap": "0",
+  			"margin": {
+  				"top": "var:preset|spacing|160"
+  			}
+  		}
+  	},
+  	"layout": {
+  		"type": "flex",
+  		"orientation": "vertical"
+  	}
+  } -->
+  <div class="wp-block-group alignfull" style="margin-top: var(--wp--preset--spacing--160)">
+    <!-- wp:pattern {
+    	"slug": "capsule/mbf-split-banners"
+    } /-->
+
+    <!-- wp:pattern {
+    	"slug": "capsule/mbf-faq"
+    } /-->
+  </div>
+  <!-- /wp:group -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {
+	"slug": "footer"
+} /-->

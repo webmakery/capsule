@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "slug": "mbf-secondary-menu",
+  "title": "Secondary",
+  "blockTypes": ["core/navigation"],
+  "styles": {
+    "spacing": {
+      "blockGap": "var(--wp--preset--spacing--50)"
+    },
+    "typography": {
+      "fontSize": "var(--wp--preset--font-size--x-small)"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "slug": "mbf-button-overlay",
+  "title": "Overlay",
+  "blockTypes": ["core/button"],
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--mbf-button-contrast)",
+      "text": "var(--wp--preset--color--mbf-button)"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "apiVersion": 3,
+  "name": "custom/mega-menu",
+  "title": "Mega Menu",
+  "category": "design",
+  "parent": ["core/navigation"],
+  "description": "A top-level menu trigger that opens a large custom dropdown content area.",
+  "attributes": {
+    "label": {
+      "type": "string",
+      "role": "content"
+    }
+  },
+  "usesContext": [
+    "textColor",
+    "customTextColor",
+    "backgroundColor",
+    "customBackgroundColor",
+    "overlayTextColor",
+    "customOverlayTextColor",
+    "overlayBackgroundColor",
+    "customOverlayBackgroundColor",
+    "fontSize",
+    "customFontSize",
+    "showSubmenuIcon",
+    "maxNestingLevel",
+    "openSubmenusOnClick",
+    "style"
+  ],
+  "supports": {
+    "html": false,
+    "interactivity": true,
+    "jsx": true,
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontWeight": true,
+      "__experimentalFontStyle": true,
+      "__experimentalTextTransform": true,
+      "__experimentalTextDecoration": true,
+      "__experimentalLetterSpacing": true,
+      "__experimentalDefaultControls": {
+        "fontSize": true
+      }
+    }
+  },
+  "render": "file:./render.php"
+}

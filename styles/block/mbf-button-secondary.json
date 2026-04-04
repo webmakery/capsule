@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "slug": "mbf-button-secondary",
+  "title": "Secondary",
+  "blockTypes": ["core/button"],
+  "styles": {
+    "color": {
+      "text": "var(--wp--preset--color--mbf-button)"
+    }
+  }
+}

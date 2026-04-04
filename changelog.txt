@@ -1,0 +1,13 @@
+*** Capsule Theme Changelog ***
+
+2026-03-25 - version 1.0.1
+* New - Store notification styles
+* Update - Post sections default thumbnail size
+* Update - Change default content in section patterns
+* Fix - Banner section styles
+* Fix - Product Categories Styles
+* Fix - Sticky Menu styles
+* Fix - Accordion block styles
+
+2026-03-20 - version 1.0.0
+* Release

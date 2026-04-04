@@ -1,0 +1,68 @@
+<!-- wp:template-part {
+	"slug": "header"
+} /-->
+
+<!-- wp:pattern { "slug": "capsule/mbf-breadcrumbs" } /-->
+
+<!-- wp:group {
+	"tagName": "main",
+	"metadata": {
+		"name": "Main"
+	},
+	"style": {
+		"spacing": {
+			"blockGap": "0",
+			"margin": {
+				"top": "0",
+				"bottom": "0"
+			}
+		}
+	},
+	"layout": {
+		"type": "default"
+	}
+} -->
+<main class="wp-block-group" style="margin-top: 0; margin-bottom: 0">
+  <!-- wp:pattern { "slug": "capsule/mbf-page" } /-->
+
+  <!-- wp:group {
+  	"metadata": {
+  		"name": "Bottom Sections"
+  	},
+  	"align": "full",
+  	"style": {
+  		"spacing": {
+  			"blockGap": "var:preset|spacing|160",
+  			"margin": {
+  				"top": "var:preset|spacing|160",
+  				"bottom": "var:preset|spacing|160"
+  			},
+  			"padding": {
+  				"top": "0",
+  				"bottom": "0"
+  			}
+  		}
+  	},
+  	"layout": {
+  		"type": "flex",
+  		"orientation": "vertical"
+  	}
+  } -->
+  <div
+    class="wp-block-group alignfull"
+    style="
+      margin-top: var(--wp--preset--spacing--160);
+      margin-bottom: var(--wp--preset--spacing--160);
+      padding-top: 0;
+      padding-bottom: 0;
+    "
+  >
+    <!-- wp:pattern { "slug": "capsule/mbf-product-carousel" } /-->
+  </div>
+  <!-- /wp:group -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {
+	"slug": "footer"
+} /-->
