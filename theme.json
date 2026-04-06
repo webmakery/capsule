@@ -3,22 +3,39 @@
     {
       "name": "page-no-title",
       "title": "Page No Title",
-      "postTypes": ["post", "page"]
+      "postTypes": [
+        "post",
+        "page"
+      ]
     },
     {
       "name": "page-my-account",
       "title": "Page: My Account",
-      "postTypes": ["page"]
+      "postTypes": [
+        "page"
+      ]
     },
     {
       "name": "single-overlay",
       "title": "Single Overlay",
-      "postTypes": ["post", "page"]
+      "postTypes": [
+        "post",
+        "page"
+      ]
     },
     {
       "name": "template-transparent-header",
       "title": "Page Transparent Header",
-      "postTypes": ["page"]
+      "postTypes": [
+        "page"
+      ]
+    },
+    {
+      "name": "template-loftfilm",
+      "title": "Page Loftfilm Structure",
+      "postTypes": [
+        "page"
+      ]
     }
   ],
   "settings": {
@@ -202,12 +219,18 @@
       ],
       "duotone": [
         {
-          "colors": ["#000000", "#FFFFFF"],
+          "colors": [
+            "#000000",
+            "#FFFFFF"
+          ],
           "name": "Duotone 1",
           "slug": "duotone-1"
         },
         {
-          "colors": ["#FFF1EA", "#EAF1FF"],
+          "colors": [
+            "#FFF1EA",
+            "#EAF1FF"
+          ],
           "name": "Duotone 2",
           "slug": "duotone-2"
         }
@@ -319,7 +342,10 @@
           "fontFamily": "Inter, sans-serif",
           "fontFace": [
             {
-              "src": ["file:./assets/fonts/inter/InterVariable.woff2", "file:./assets/fonts/inter/InterVariable.woff"],
+              "src": [
+                "file:./assets/fonts/inter/InterVariable.woff2",
+                "file:./assets/fonts/inter/InterVariable.woff"
+              ],
               "fontWeight": "400 500 600 700",
               "fontStretch": "normal",
               "fontStyle": "normal",
