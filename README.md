@@ -1,4 +1,4 @@
-# Capsule
+# Webmakerr
 
 A lightweight, customizable starter block theme for WooCommerce stores that prioritizes performance, accessibility, and modern development practices.
 
