@@ -894,6 +894,13 @@ __webpack_require__.r(__webpack_exports__);
  * Mini cart */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const openMiniCartDrawer = () => {
+    const overlay = document.querySelector('.wc-block-components-drawer__screen-overlay');
+    const isOpen = overlay?.classList.contains('wc-block-components-drawer__screen-overlay--with-slide-in');
+    if (isOpen) return;
+    const miniCartButton = document.querySelector('.wc-block-mini-cart__button');
+    miniCartButton?.click();
+  };
   const formatMiniCartCounter = () => {
     setTimeout(() => {
       document.querySelectorAll('span.wp-block-woocommerce-mini-cart-title-items-counter-block').forEach(el => {
@@ -932,6 +939,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('.wc-block-mini-cart__button');
     if (!btn) return;
     btn.setAttribute('data-label', window.frontendSettings?.CartText || 'Cart');
+  }
+  document.body.addEventListener('wc-blocks_added_to_cart', openMiniCartDrawer);
+  if (window.jQuery) {
+    window.jQuery(document.body).on('added_to_cart', openMiniCartDrawer);
   }
   addMiniCartDataLabel();
 });
