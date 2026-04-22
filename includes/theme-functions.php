@@ -179,7 +179,24 @@ if ( ! function_exists( 'mbf_get_facebook_ads_page_id' ) ) {
 	 */
 	function mbf_get_facebook_ads_page_id() {
 		$page = get_page_by_path( 'facebook-ads', OBJECT, 'page' );
-		return $page ? (int) $page->ID : 0;
+		if ( $page ) {
+			return (int) $page->ID;
+		}
+
+		$template_pages = get_posts(
+			array(
+				'post_type'      => 'page',
+				'post_status'    => array( 'publish', 'draft', 'pending', 'private' ),
+				'posts_per_page' => 1,
+				'meta_key'       => '_wp_page_template',
+				'meta_value'     => 'page-facebook-ads-course.php',
+				'orderby'        => 'modified',
+				'order'          => 'DESC',
+				'fields'         => 'ids',
+			)
+		);
+
+		return ! empty( $template_pages ) ? (int) $template_pages[0] : 0;
 	}
 }
 
@@ -300,6 +317,50 @@ if ( ! function_exists( 'mbf_render_facebook_ads_meta_box' ) ) {
 		}
 
 		echo '</tbody></table>';
+
+		$faq_items = get_post_meta( $post->ID, 'faq_items', true );
+		$faq_items = is_array( $faq_items ) ? array_values( $faq_items ) : array();
+		if ( empty( $faq_items ) ) {
+			$faq_items = array(
+				array(
+					'question' => '',
+					'answer'   => '',
+				),
+			);
+		}
+
+		echo '<hr />';
+		echo '<h3>' . esc_html__( 'FAQ items', 'capsule' ) . '</h3>';
+		echo '<p>' . esc_html__( 'Add one or more FAQ rows. Every saved item will be shown on the /facebook-ads page.', 'capsule' ) . '</p>';
+		echo '<div id="mbf-faq-repeater">';
+		echo '<div class="mbf-faq-items">';
+
+		foreach ( $faq_items as $index => $item ) {
+			$question = isset( $item['question'] ) ? (string) $item['question'] : '';
+			$answer   = isset( $item['answer'] ) ? (string) $item['answer'] : '';
+
+			echo '<div class="mbf-faq-item" style="margin-bottom:16px; padding:12px; border:1px solid #dcdcde; border-radius:4px;">';
+			echo '<p><label><strong>' . esc_html__( 'Question', 'capsule' ) . '</strong><br />';
+			echo '<input type="text" class="widefat" name="mbf_facebook_ads_faqs[' . esc_attr( (string) $index ) . '][question]" value="' . esc_attr( $question ) . '" /></label></p>';
+			echo '<p><label><strong>' . esc_html__( 'Answer', 'capsule' ) . '</strong><br />';
+			echo '<textarea class="widefat" rows="3" name="mbf_facebook_ads_faqs[' . esc_attr( (string) $index ) . '][answer]">' . esc_textarea( $answer ) . '</textarea></label></p>';
+			echo '<button type="button" class="button-link-delete mbf-remove-faq-item">' . esc_html__( 'Remove FAQ', 'capsule' ) . '</button>';
+			echo '</div>';
+		}
+
+		echo '</div>';
+		echo '<p><button type="button" class="button" id="mbf-add-faq-item">' . esc_html__( 'Add FAQ item', 'capsule' ) . '</button></p>';
+		echo '</div>';
+
+		echo '<script type="text/template" id="mbf-faq-item-template">';
+		echo '<div class="mbf-faq-item" style="margin-bottom:16px; padding:12px; border:1px solid #dcdcde; border-radius:4px;">';
+		echo '<p><label><strong>' . esc_html__( 'Question', 'capsule' ) . '</strong><br />';
+		echo '<input type="text" class="widefat" name="mbf_facebook_ads_faqs[__index__][question]" value="" /></label></p>';
+		echo '<p><label><strong>' . esc_html__( 'Answer', 'capsule' ) . '</strong><br />';
+		echo '<textarea class="widefat" rows="3" name="mbf_facebook_ads_faqs[__index__][answer]"></textarea></label></p>';
+		echo '<button type="button" class="button-link-delete mbf-remove-faq-item">' . esc_html__( 'Remove FAQ', 'capsule' ) . '</button>';
+		echo '</div>';
+		echo '</script>';
 	}
 }
 
@@ -318,7 +379,7 @@ if ( ! function_exists( 'mbf_facebook_ads_admin_assets' ) ) {
 		wp_enqueue_media();
 		wp_add_inline_script(
 			'jquery-core',
-			'jQuery(function($){$(".mbf-select-image").on("click", function(e){e.preventDefault(); var button=$(this); var target=$("#"+button.data("target")); var preview=button.closest("td").find(".mbf-image-preview"); var frame=wp.media({title:"Select image",button:{text:"Use image"},multiple:false}); frame.on("select", function(){var attachment=frame.state().get("selection").first().toJSON(); target.val(attachment.url); preview.attr("src", attachment.url);}); frame.open();});});'
+			'jQuery(function($){$(".mbf-select-image").on("click", function(e){e.preventDefault(); var button=$(this); var target=$("#"+button.data("target")); var preview=button.closest("td").find(".mbf-image-preview"); var frame=wp.media({title:"Select image",button:{text:"Use image"},multiple:false}); frame.on("select", function(){var attachment=frame.state().get("selection").first().toJSON(); target.val(attachment.url); preview.attr("src", attachment.url);}); frame.open();}); var repeater=$("#mbf-faq-repeater"); if(!repeater.length){return;} var itemsContainer=repeater.find(".mbf-faq-items"); var template=$("#mbf-faq-item-template").html() || ""; var faqIndex=itemsContainer.find(".mbf-faq-item").length; $("#mbf-add-faq-item").on("click", function(e){e.preventDefault(); if(!template){return;} var markup=template.replace(/__index__/g, faqIndex); faqIndex += 1; itemsContainer.append(markup);}); repeater.on("click", ".mbf-remove-faq-item", function(e){e.preventDefault(); $(this).closest(".mbf-faq-item").remove();});});'
 		);
 	}
 }
@@ -367,6 +428,36 @@ if ( ! function_exists( 'mbf_save_facebook_ads_meta_box' ) ) {
 			} else {
 				update_post_meta( $post_id, $key, $value );
 			}
+		}
+
+		$faq_input = isset( $_POST['mbf_facebook_ads_faqs'] ) && is_array( $_POST['mbf_facebook_ads_faqs'] )
+			? wp_unslash( $_POST['mbf_facebook_ads_faqs'] )
+			: array();
+
+		$faq_items = array();
+
+		foreach ( $faq_input as $faq_row ) {
+			if ( ! is_array( $faq_row ) ) {
+				continue;
+			}
+
+			$question = isset( $faq_row['question'] ) ? sanitize_text_field( trim( (string) $faq_row['question'] ) ) : '';
+			$answer   = isset( $faq_row['answer'] ) ? sanitize_textarea_field( trim( (string) $faq_row['answer'] ) ) : '';
+
+			if ( '' === $question && '' === $answer ) {
+				continue;
+			}
+
+			$faq_items[] = array(
+				'question' => $question,
+				'answer'   => $answer,
+			);
+		}
+
+		if ( empty( $faq_items ) ) {
+			delete_post_meta( $post_id, 'faq_items' );
+		} else {
+			update_post_meta( $post_id, 'faq_items', $faq_items );
 		}
 	}
 }
