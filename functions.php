@@ -29,6 +29,47 @@ if ( ! class_exists( 'Capsule' ) ) {
 		 */
 		public function init() {
 			add_action( 'after_setup_theme', array( $this, 'theme_setup' ) );
+			add_filter( 'theme_page_templates', array( $this, 'register_page_templates' ) );
+			add_filter( 'template_include', array( $this, 'load_page_template' ) );
+		}
+
+		/**
+		 * Register custom page templates so they appear in Page Attributes.
+		 *
+		 * @param array<string, string> $page_templates Existing templates.
+		 * @return array<string, string>
+		 */
+		public function register_page_templates( $page_templates ) {
+			$page_templates['page-facebook-ads-course.php'] = __( 'Facebook Ads Course', 'capsule' );
+
+			return $page_templates;
+		}
+
+		/**
+		 * Load the selected custom page template file.
+		 *
+		 * @param string $template Default resolved template path.
+		 * @return string
+		 */
+		public function load_page_template( $template ) {
+			if ( ! is_page() ) {
+				return $template;
+			}
+
+			$page_id       = get_queried_object_id();
+			$template_slug = get_page_template_slug( $page_id );
+
+			if ( 'page-facebook-ads-course.php' !== $template_slug ) {
+				return $template;
+			}
+
+			$custom_template = get_theme_file_path( 'page-facebook-ads-course.php' );
+
+			if ( file_exists( $custom_template ) ) {
+				return $custom_template;
+			}
+
+			return $template;
 		}
 
 		/**
