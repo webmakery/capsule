@@ -94,6 +94,7 @@ if ( ! class_exists( 'Capsule' ) ) {
 				'includes/pattern-enhancer.php',
 				'includes/cover-link.php',
 				'includes/woocommerce.php',
+				'includes/fluentcart.php',
 				'includes/mega-menu.php',
 			);
 
