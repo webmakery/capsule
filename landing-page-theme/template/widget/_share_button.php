@@ -1,1 +1,0 @@
-<div class="sharePopup"><span class="name"><?php _e('Share', 'rap');?>:</span><div class="share-btn"></div></div>
