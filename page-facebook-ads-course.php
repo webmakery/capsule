@@ -44,6 +44,12 @@ $defaults = array(
 	'primary_button_text'        => 'Order Now 25$',
 	'secondary_button_text'      => 'Preview a Free Lesson',
 	'hero_video_url'             => 'https://cdn.webmakerr.com/Learn/FacebookAds/intro.mp4',
+	'hero_video_panel_title'     => 'Campaign Launch Blueprint',
+	'hero_video_panel_description' => 'Plan offers, budgets, bids, and retargeting sequences so every ad set launches with clear hooks and confident spend.',
+	'hero_video_panel_tag'       => 'Instructor-led guidance',
+	'hero_video_pill_1'          => 'Proven hooks & headlines',
+	'hero_video_pill_2'          => 'Budget + bid calculators',
+	'hero_video_pill_3'          => 'Data-backed testing plan',
 	'section1_badge'             => 'Why teams choose Facebook Ads Mastery',
 	'section1_title'             => 'Everything you need to launch Facebook ads that convert',
 	'section1_description'       => 'Get the creative, calculators, scripts, and checklists to build profitable campaigns faster—while your team focuses on refining offers and turning spend into revenue.',
@@ -61,6 +67,18 @@ $defaults = array(
 	'testimonials_badge'         => 'Student results',
 	'testimonials_title'         => 'Marketers turning ads into revenue',
 	'testimonials_description'   => 'See how the Facebook Ads course helps founders and growth teams launch profitable campaigns without guesswork.',
+	'testimonial_1_quote'        => '“The launch templates let us ship three winning campaigns in week one. Our cost per lead dropped 42% without hiring an agency.”',
+	'testimonial_1_name'         => 'Noah Patel',
+	'testimonial_1_title'        => 'Marketing Ops Lead, Horizon Creative',
+	'testimonial_1_initial'      => 'N',
+	'testimonial_2_quote'        => '“Following the weekly optimization checklist took us to 3.1x ROAS in 30 days. The offer tweaks alone paid for the course in a weekend.”',
+	'testimonial_2_name'         => 'Melissa Grant',
+	'testimonial_2_title'        => 'VP Growth, Northwind Legal',
+	'testimonial_2_initial'      => 'M',
+	'testimonial_3_quote'        => '“The retargeting scripts and email automations filled the gaps in our funnel. Every ad click now gets a personalized follow-up sequence.”',
+	'testimonial_3_name'         => 'Sofia Alvarez',
+	'testimonial_3_title'        => 'Head of Growth, Latitude Labs',
+	'testimonial_3_initial'      => 'S',
 	'process_badge'              => 'Process',
 	'process_title'              => 'Launch campaigns without guesswork.',
 	'process_description'        => 'Follow the curriculum, checklists, and calculators with weekly updates—so leadership knows what’s launching, what’s optimizing, and when the next revenue lift lands.',
@@ -116,6 +134,26 @@ if ( empty( $faq_items ) ) {
 }
 
 $checkout_url = $content['checkout_url'];
+$testimonials = array(
+	array(
+		'quote'   => $content['testimonial_1_quote'],
+		'name'    => $content['testimonial_1_name'],
+		'title'   => $content['testimonial_1_title'],
+		'initial' => $content['testimonial_1_initial'],
+	),
+	array(
+		'quote'   => $content['testimonial_2_quote'],
+		'name'    => $content['testimonial_2_name'],
+		'title'   => $content['testimonial_2_title'],
+		'initial' => $content['testimonial_2_initial'],
+	),
+	array(
+		'quote'   => $content['testimonial_3_quote'],
+		'name'    => $content['testimonial_3_name'],
+		'title'   => $content['testimonial_3_title'],
+		'initial' => $content['testimonial_3_initial'],
+	),
+);
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -703,16 +741,16 @@ $checkout_url = $content['checkout_url'];
                     <div class="p-4 position-relative" style="z-index:2; min-height:350px;">
                         <div class="d-flex justify-content-between align-items-start mb-3 hero-info-row">
                             <div>
-                                <p class="fw-semibold text-dark mb-1">Campaign Launch Blueprint</p>
-                                <p class="small text-muted mb-0">Plan offers, budgets, bids, and retargeting sequences so every ad set launches with clear hooks and confident spend.</p>
+                                <p class="fw-semibold text-dark mb-1"><?php echo esc_html( $content['hero_video_panel_title'] ); ?></p>
+                                <p class="small text-muted mb-0"><?php echo esc_html( $content['hero_video_panel_description'] ); ?></p>
                             </div>
-                            <span class="small text-muted fw-normal hero-pill">Instructor-led guidance</span>
+                            <span class="small text-muted fw-normal hero-pill"><?php echo esc_html( $content['hero_video_panel_tag'] ); ?></span>
                         </div>
 
                         <div class="d-flex flex-wrap gap-2 small text-muted mb-3">
-                            <span class="border rounded-pill px-3 py-1">Proven hooks & headlines</span>
-                            <span class="border rounded-pill px-3 py-1">Budget + bid calculators</span>
-                            <span class="border rounded-pill px-3 py-1">Data-backed testing plan</span>
+                            <span class="border rounded-pill px-3 py-1"><?php echo esc_html( $content['hero_video_pill_1'] ); ?></span>
+                            <span class="border rounded-pill px-3 py-1"><?php echo esc_html( $content['hero_video_pill_2'] ); ?></span>
+                            <span class="border rounded-pill px-3 py-1"><?php echo esc_html( $content['hero_video_pill_3'] ); ?></span>
                         </div>
 
                         <div class="position-relative border rounded-3 p-3 shadow-sm hero-animation-shell">
@@ -815,26 +853,7 @@ $checkout_url = $content['checkout_url'];
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var testimonials = [
-            {
-                quote: '“The launch templates let us ship three winning campaigns in week one. Our cost per lead dropped 42% without hiring an agency.”',
-                name: 'Noah Patel',
-                title: 'Marketing Ops Lead, Horizon Creative',
-                initial: 'N'
-            },
-            {
-                quote: '“Following the weekly optimization checklist took us to 3.1x ROAS in 30 days. The offer tweaks alone paid for the course in a weekend.”',
-                name: 'Melissa Grant',
-                title: 'VP Growth, Northwind Legal',
-                initial: 'M'
-            },
-            {
-                quote: '“The retargeting scripts and email automations filled the gaps in our funnel. Every ad click now gets a personalized follow-up sequence.”',
-                name: 'Sofia Alvarez',
-                title: 'Head of Growth, Latitude Labs',
-                initial: 'S'
-            }
-        ];
+        var testimonials = <?php echo wp_json_encode( $testimonials ); ?>;
 
         var desktopCards = Array.prototype.slice.call(document.querySelectorAll('[data-testimonial-card="desktop"]'));
         var mobileCard = document.querySelector('[data-testimonial-card="mobile"]');
