@@ -22,12 +22,73 @@ wp_enqueue_script(
 
 $template_assets = get_theme_file_uri( 'assets/images/facebook-ads-course' );
 $theme_dir       = get_theme_file_uri();
-$checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=23&quantity=1';
+$facebook_ads_id = function_exists( 'mbf_get_facebook_ads_page_id' ) ? mbf_get_facebook_ads_page_id() : 0;
+$meta            = $facebook_ads_id ? get_post_meta( $facebook_ads_id ) : array();
+
+$defaults = array(
+	'seo_title'                  => 'Facebook Ads Mastery Course',
+	'seo_description'            => 'Launch Facebook ads that scale revenue with proven frameworks, calculators, templates, and support.',
+	'hero_badge'                 => 'Facebook Ads Mastery Course',
+	'hero_title'                 => 'Launch Facebook ads that scale revenue without the agency markup.',
+	'hero_description'           => 'Facebook Ads Mastery gives you proven hooks, headlines, budget and bid calculators, retargeting scripts, and plug-and-play landing pages so campaigns go live fast and stay profitable.',
+	'hero_notice'                => 'Seats are limited—reserve your cohort spot today',
+	'checkout_url'               => 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=23&quantity=1',
+	'primary_button_text'        => 'Order Now 25$',
+	'secondary_button_text'      => 'Preview a Free Lesson',
+	'hero_video_url'             => 'https://cdn.webmakerr.com/Learn/FacebookAds/intro.mp4',
+	'section1_badge'             => 'Why teams choose Facebook Ads Mastery',
+	'section1_title'             => 'Everything you need to launch Facebook ads that convert',
+	'section1_description'       => 'Get the creative, calculators, scripts, and checklists to build profitable campaigns faster—while your team focuses on refining offers and turning spend into revenue.',
+	'section1_cta_text'          => 'Enroll Now',
+	'feature_card_1_title'       => 'Creative that earns the click',
+	'feature_card_1_description' => 'Swipe proven hooks and headlines, then plug them into ready-to-launch ad angles so every campaign starts with conversion-focused creative.',
+	'feature_card_1_image'       => 'https://cdn.webmakerr.com/website/facebook-ads-3.png',
+	'feature_card_2_title'       => 'Optimization that compounds',
+	'feature_card_2_description' => 'Follow weekly optimization checklists that tighten targeting, refresh creatives, and steadily raise ROAS without guesswork.',
+	'feature_card_2_image'       => 'https://cdn.webmakerr.com/website/facebook-ads-1.png',
+	'feature_card_3_title'       => 'Measurement built for teams',
+	'feature_card_3_description' => 'Use budget and bid calculators, tracking templates, and retargeting scripts to scale spend confidently and keep pipelines full.',
+	'feature_card_3_image'       => 'https://cdn.webmakerr.com/website/facebook-ads-2.png',
+	'extras_title'               => '...plus everything needed for a profitable Facebook ads system',
+	'testimonials_badge'         => 'Student results',
+	'testimonials_title'         => 'Marketers turning ads into revenue',
+	'testimonials_description'   => 'See how the Facebook Ads course helps founders and growth teams launch profitable campaigns without guesswork.',
+	'process_badge'              => 'Process',
+	'process_title'              => 'Launch campaigns without guesswork.',
+	'process_description'        => 'Follow the curriculum, checklists, and calculators with weekly updates—so leadership knows what’s launching, what’s optimizing, and when the next revenue lift lands.',
+	'process_cta_primary'        => 'Enroll Now',
+	'process_cta_secondary'      => 'Preview a Free Lesson',
+	'process_video_url'          => 'https://cdn.webmakerr.com/Learn/FacebookAds/1.Facebook%20Advertising%20Overview.mp4',
+	'faq_badge'                  => 'Frequently Asked Questions',
+	'faq_title'                  => 'Clear answers so you can enroll with confidence',
+	'faq_description'            => 'If you\'re on the fence, these quick answers explain exactly what you get, how it works, and what to do if it isn\'t the right fit.',
+	'final_cta_title'            => 'Claim your seat in Facebook Ads Mastery. Bonuses disappear when the cohort fills.',
+	'final_cta_button_text'      => 'Order Now 25$',
+	'mobile_sticky_primary_text' => 'Order Now 25$',
+	'mobile_sticky_secondary_text' => 'Free Lesson',
+	'webhook_url'                => 'https://roma.webmakerr.com/?fluentcrm=1&route=contact&hash=f4c52bd8-9874-46f6-8b57-2b5759d41a16',
+	'redirect_url'               => '/thank-you-contact',
+);
+
+$content = array();
+foreach ( $defaults as $key => $default_value ) {
+	$value = isset( $meta[ $key ][0] ) ? $meta[ $key ][0] : '';
+	$value = is_string( $value ) ? trim( $value ) : '';
+	$content[ $key ] = '' !== $value ? $value : $default_value;
+}
+
+$checkout_url = $content['checkout_url'];
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php if ( ! empty( $content['seo_title'] ) ) : ?>
+        <meta name="title" content="<?php echo esc_attr( $content['seo_title'] ); ?>">
+    <?php endif; ?>
+    <?php if ( ! empty( $content['seo_description'] ) ) : ?>
+        <meta name="description" content="<?php echo esc_attr( $content['seo_description'] ); ?>">
+    <?php endif; ?>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class( 'page-template-facebook-ads-course' ); ?>>
@@ -564,35 +625,35 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
         <div class="p-4 p-md-5 bg-white border rounded-4 shadow-sm row g-4 align-items-center hero-row">
             <div class="col-lg-6 hero-copy">
                 <span class="d-inline-flex align-items-center small bg-light text-secondary px-3 py-1 rounded-pill mb-3">
-                    Facebook Ads Mastery Course
+                    <?php echo esc_html( $content['hero_badge'] ); ?>
                     <svg width="12" height="12" class="ms-2" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M4 2l4 4-4 4" />
                     </svg>
                 </span>
 
                 <h1 class="fw-semibold lh-sm text-dark hero-title">
-                    Launch Facebook ads that scale revenue without the agency markup.<br>
+                    <?php echo esc_html( $content['hero_title'] ); ?><br>
                 </h1>
 
                 <p class="mt-3 text-secondary">
-                    Facebook Ads Mastery gives you proven hooks, headlines, budget and bid calculators, retargeting scripts, and plug-and-play landing pages so campaigns go live fast and stay profitable.
+                    <?php echo esc_html( $content['hero_description'] ); ?>
                 </p>
 
                 <div class="d-flex flex-wrap hero-actions mt-4">
                     <a href="<?php echo esc_url( $checkout_url ); ?>" class="btn btn-dark btn-lg d-flex align-items-center gap-2 w-100" style="max-width:260px;">
                         <img src="<?php echo esc_url( $template_assets . '/user3.png' ); ?>" width="18" alt="Enrollment icon">
-                        Order Now 25$
+                        <?php echo esc_html( $content['primary_button_text'] ); ?>
                     </a>
 
                     <a href="#get-free-trial" class="btn btn-light border btn-lg d-flex align-items-center justify-content-between w-100" data-trial-open style="max-width:260px;">
-                        <span class="text-dark">Preview a Free Lesson</span>
+                        <span class="text-dark"><?php echo esc_html( $content['secondary_button_text'] ); ?></span>
                         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4">
                             <path d="M4 2l6 5-6 5" />
                         </svg>
                     </a>
                 </div>
 
-                <p class="small text-muted mt-2">Seats are limited—reserve your cohort spot today</p>
+                <p class="small text-muted mt-2"><?php echo esc_html( $content['hero_notice'] ); ?></p>
 
                 <div class="d-flex gap-4 mt-4">
                     <img src="<?php echo esc_url( $template_assets . '/sslupf.svg' ); ?>" height="20" alt="Trustpilot">
@@ -620,7 +681,7 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
                             <div class="ratio ratio-16x9 w-100">
                                 <video
                                     class="w-100 h-100 rounded-3"
-                                    data-src="https://cdn.webmakerr.com/Learn/FacebookAds/intro.mp4"
+                                    data-src="<?php echo esc_url( $content['hero_video_url'] ); ?>"
                                     autoplay
                                     muted
                                     playsinline
@@ -824,19 +885,19 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
     <div class="container-lg">
         <div class="text-center mx-auto" style="max-width: 700px;">
             <span class="d-inline-flex align-items-center bg-white border px-3 py-1 rounded-pill text-secondary small shadow-sm mb-3">
-                Why teams choose Facebook Ads Mastery
+                <?php echo esc_html( $content['section1_badge'] ); ?>
             </span>
 
             <h2 class="fw-semibold display-6 text-dark lh-sm">
-                Everything you need to launch Facebook ads that convert
+                <?php echo esc_html( $content['section1_title'] ); ?>
             </h2>
 
             <p class="mt-3 text-secondary">
-                Get the creative, calculators, scripts, and checklists to build profitable campaigns faster—while your team focuses on refining offers and turning spend into revenue.
+                <?php echo esc_html( $content['section1_description'] ); ?>
             </p>
 
             <a href="<?php echo esc_url( $checkout_url ); ?>" class="btn btn-dark btn-lg mt-4 shadow-sm">
-                Enroll Now
+                <?php echo esc_html( $content['section1_cta_text'] ); ?>
             </a>
         </div>
 
@@ -847,13 +908,13 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
                         <span class="fw-bold text-secondary small">01</span>
                     </span>
 
-                    <h5 class="fw-semibold text-dark">Creative that earns the click</h5>
+                    <h5 class="fw-semibold text-dark"><?php echo esc_html( $content['feature_card_1_title'] ); ?></h5>
 
                     <p class="text-muted small mt-2">
-                        Swipe proven hooks and headlines, then plug them into ready-to-launch ad angles so every campaign starts with conversion-focused creative.
+                        <?php echo esc_html( $content['feature_card_1_description'] ); ?>
                     </p>
 
-                    <img src="https://cdn.webmakerr.com/website/facebook-ads-3.png" alt="Facebook ads creative frameworks graphic" class="mt-auto pt-3 w-100" style="height: 250px; object-fit: cover;" />
+                    <img src="<?php echo esc_url( $content['feature_card_1_image'] ); ?>" alt="Facebook ads creative frameworks graphic" class="mt-auto pt-3 w-100" style="height: 250px; object-fit: cover;" />
                 </div>
             </div>
 
@@ -863,13 +924,13 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
                         <span class="fw-bold text-secondary small">02</span>
                     </span>
 
-                    <h5 class="fw-semibold text-dark">Optimization that compounds</h5>
+                    <h5 class="fw-semibold text-dark"><?php echo esc_html( $content['feature_card_2_title'] ); ?></h5>
 
                     <p class="text-muted small mt-2">
-                        Follow weekly optimization checklists that tighten targeting, refresh creatives, and steadily raise ROAS without guesswork.
+                        <?php echo esc_html( $content['feature_card_2_description'] ); ?>
                     </p>
 
-                    <img src="https://cdn.webmakerr.com/website/facebook-ads-1.png" alt="Optimization checklist graphic" class="mt-auto pt-3 w-100" style="height: 250px; object-fit: cover;" />
+                    <img src="<?php echo esc_url( $content['feature_card_2_image'] ); ?>" alt="Optimization checklist graphic" class="mt-auto pt-3 w-100" style="height: 250px; object-fit: cover;" />
                 </div>
             </div>
 
@@ -879,13 +940,13 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
                         <span class="fw-bold text-secondary small">03</span>
                     </span>
 
-                    <h5 class="fw-semibold text-dark">Measurement built for teams</h5>
+                    <h5 class="fw-semibold text-dark"><?php echo esc_html( $content['feature_card_3_title'] ); ?></h5>
 
                     <p class="text-muted small mt-2">
-                        Use budget and bid calculators, tracking templates, and retargeting scripts to scale spend confidently and keep pipelines full.
+                        <?php echo esc_html( $content['feature_card_3_description'] ); ?>
                     </p>
 
-                    <img src="https://cdn.webmakerr.com/website/facebook-ads-2.png" alt="Measurement and retargeting toolkit graphic" class="mt-auto pt-3 w-100" style="height: 250px; object-fit: cover;" />
+                    <img src="<?php echo esc_url( $content['feature_card_3_image'] ); ?>" alt="Measurement and retargeting toolkit graphic" class="mt-auto pt-3 w-100" style="height: 250px; object-fit: cover;" />
 
                 </div>
             </div>
@@ -896,7 +957,7 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
 <section class="py-5 bg-light">
     <div class="container-lg">
         <h2 class="text-center fw-semibold lh-sm text-dark mb-5" style="font-size: 2.5rem;">
-            ...plus everything needed for a profitable Facebook ads system
+            <?php echo esc_html( $content['extras_title'] ); ?>
         </h2>
 
         <div class="row g-4 justify-content-center more-feature-grid">
@@ -941,15 +1002,15 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
 <section class="py-5 bg-light">
     <div class="container-lg text-center">
         <span class="d-inline-flex align-items-center bg-white border px-3 py-1 rounded-pill text-secondary small shadow-sm mb-3">
-            Student results
+            <?php echo esc_html( $content['testimonials_badge'] ); ?>
         </span>
 
         <h2 class="fw-semibold lh-sm text-dark" style="font-size: 2.5rem;">
-            Marketers turning ads into revenue
+            <?php echo esc_html( $content['testimonials_title'] ); ?>
         </h2>
 
         <p class="mt-3 text-secondary small mx-auto" style="max-width: 620px;">
-            See how the Facebook Ads course helps founders and growth teams launch profitable campaigns without guesswork.
+            <?php echo esc_html( $content['testimonials_description'] ); ?>
         </p>
 
         <div class="d-none d-md-flex justify-content-center align-items-center gap-4 mt-5" data-testimonial-container="desktop">
@@ -1023,20 +1084,20 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
         <div class="bg-white border rounded-4 shadow-sm p-4 p-md-5 row g-4 align-items-center">
             <div class="col-md-5 d-flex flex-column align-items-center align-items-md-start text-center text-md-start">
                     <span class="d-inline-flex align-items-center bg-white border px-3 py-1 rounded-pill text-secondary small shadow-sm mb-3">
-                    Process
+                    <?php echo esc_html( $content['process_badge'] ); ?>
                     </span>
 
                 <h2 class="fw-semibold lh-sm text-dark mb-3" style="font-size: 2.25rem;">
-                    Launch campaigns without guesswork.
+                    <?php echo esc_html( $content['process_title'] ); ?>
                 </h2>
 
                 <p class="text-muted small mb-4" style="max-width: 420px;">
-                    Follow the curriculum, checklists, and calculators with weekly updates—so leadership knows what’s launching, what’s optimizing, and when the next revenue lift lands.
+                    <?php echo esc_html( $content['process_description'] ); ?>
                 </p>
 
                 <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start w-100" style="max-width: 420px;">
-                    <a href="<?php echo esc_url( $checkout_url ); ?>" class="btn btn-dark btn-lg shadow-sm">Enroll Now</a>
-                    <a href="#get-free-trial" class="btn btn-light border btn-lg" data-trial-open>Preview a Free Lesson</a>
+                    <a href="<?php echo esc_url( $checkout_url ); ?>" class="btn btn-dark btn-lg shadow-sm"><?php echo esc_html( $content['process_cta_primary'] ); ?></a>
+                    <a href="#get-free-trial" class="btn btn-light border btn-lg" data-trial-open><?php echo esc_html( $content['process_cta_secondary'] ); ?></a>
                 </div>
             </div>
 
@@ -1046,7 +1107,7 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
                         <div class="ratio ratio-16x9 rounded-3 overflow-hidden border" style="--bs-border-opacity: 0.35;">
                             <video
                                 class="w-100 h-100"
-                                data-src="https://cdn.webmakerr.com/Learn/FacebookAds/1.Facebook%20Advertising%20Overview.mp4"
+                                data-src="<?php echo esc_url( $content['process_video_url'] ); ?>"
                                 style="object-fit: cover;"
                                 controls
                                 playsinline
@@ -1067,9 +1128,9 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="text-center mb-4">
-                    <span class="d-inline-flex align-items-center bg-light border px-3 py-1 rounded-pill text-secondary small mb-3">Frequently Asked Questions</span>
-                    <h2 class="fw-semibold text-dark">Clear answers so you can enroll with confidence</h2>
-                    <p class="text-secondary mt-2">If you're on the fence, these quick answers explain exactly what you get, how it works, and what to do if it isn't the right fit.</p>
+                    <span class="d-inline-flex align-items-center bg-light border px-3 py-1 rounded-pill text-secondary small mb-3"><?php echo esc_html( $content['faq_badge'] ); ?></span>
+                    <h2 class="fw-semibold text-dark"><?php echo esc_html( $content['faq_title'] ); ?></h2>
+                    <p class="text-secondary mt-2"><?php echo esc_html( $content['faq_description'] ); ?></p>
                 </div>
 
                 <div class="accordion" id="faqsAccordion">
@@ -1152,13 +1213,12 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
 
             <div class="position-relative" style="z-index:2;">
                 <h2 class="fw-semibold lh-sm text-dark mx-auto" style="font-size: 2.25rem; max-width: 700px;">
-                    Claim your seat in Facebook Ads Mastery.
-                    <br class="d-none d-sm-block">Bonuses disappear when the cohort fills.
+                    <?php echo esc_html( $content['final_cta_title'] ); ?>
                 </h2>
 
                 <div class="mt-4">
                     <a href="<?php echo esc_url( $checkout_url ); ?>" class="btn btn-dark btn-lg shadow-sm">
-                      Order Now 25$
+                      <?php echo esc_html( $content['final_cta_button_text'] ); ?>
                     </a>
                 </div>
             </div>
@@ -1170,10 +1230,10 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
     <div class="container-lg">
         <div class="d-flex gap-2">
             <a href="<?php echo esc_url( $checkout_url ); ?>" class="btn btn-dark btn-lg w-100">
-                Order Now 25$
+                <?php echo esc_html( $content['mobile_sticky_primary_text'] ); ?>
             </a>
             <a href="#get-free-trial" class="btn btn-light border btn-lg w-100 text-dark" data-trial-open>
-                Free Lesson
+                <?php echo esc_html( $content['mobile_sticky_secondary_text'] ); ?>
             </a>
         </div>
     </div>
@@ -1189,7 +1249,7 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
         var errorAlert = modalBackdrop ? modalBackdrop.querySelector('[data-trial-error]') : null;
         var spinner = modalBackdrop ? modalBackdrop.querySelector('[data-trial-spinner]') : null;
         var submitBtn = modalBackdrop ? modalBackdrop.querySelector('[data-trial-submit]') : null;
-        var webhookUrl = 'https://roma.webmakerr.com/?fluentcrm=1&route=contact&hash=f4c52bd8-9874-46f6-8b57-2b5759d41a16';
+        var webhookUrl = <?php echo wp_json_encode( esc_url_raw( $content['webhook_url'] ) ); ?>;
 
         if (!modalBackdrop || !form || !nameInput || !emailInput) {
             return;
@@ -1289,7 +1349,7 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
                 .then(function () {
                     form.reset();
                     showStatus('success');
-                    window.location.href = '/thank-you-contact';
+                    window.location.href = <?php echo wp_json_encode( esc_url_raw( $content['redirect_url'] ) ); ?>;
                 })
                 .catch(function () {
                     showStatus('error');

@@ -167,6 +167,213 @@ add_filter( 'wpcf7_form_elements', 'mbf_replace_wpcf7_button' );
 
 /**
  * ==================================
+ * Facebook Ads Admin Content Fields
+ * ==================================
+ */
+
+if ( ! function_exists( 'mbf_get_facebook_ads_page_id' ) ) {
+	/**
+	 * Get the page id used for the /facebook-ads route.
+	 *
+	 * @return int
+	 */
+	function mbf_get_facebook_ads_page_id() {
+		$page = get_page_by_path( 'facebook-ads', OBJECT, 'page' );
+		return $page ? (int) $page->ID : 0;
+	}
+}
+
+if ( ! function_exists( 'mbf_get_facebook_ads_admin_fields' ) ) {
+	/**
+	 * Field definitions for Facebook ads landing content.
+	 *
+	 * @return array
+	 */
+	function mbf_get_facebook_ads_admin_fields() {
+		return array(
+			'seo_title'                    => array( 'label' => __( 'SEO title', 'capsule' ), 'type' => 'text' ),
+			'seo_description'              => array( 'label' => __( 'SEO description', 'capsule' ), 'type' => 'textarea' ),
+			'hero_badge'                   => array( 'label' => __( 'Hero badge', 'capsule' ), 'type' => 'text', 'required' => true ),
+			'hero_title'                   => array( 'label' => __( 'Hero title', 'capsule' ), 'type' => 'text', 'required' => true ),
+			'hero_description'             => array( 'label' => __( 'Hero description', 'capsule' ), 'type' => 'textarea', 'required' => true ),
+			'hero_notice'                  => array( 'label' => __( 'Hero CTA support text', 'capsule' ), 'type' => 'text' ),
+			'checkout_url'                 => array( 'label' => __( 'Primary button URL', 'capsule' ), 'type' => 'url', 'required' => true ),
+			'primary_button_text'          => array( 'label' => __( 'Primary button text', 'capsule' ), 'type' => 'text', 'required' => true ),
+			'secondary_button_text'        => array( 'label' => __( 'Secondary button text', 'capsule' ), 'type' => 'text', 'required' => true ),
+			'hero_video_url'               => array( 'label' => __( 'Hero video URL', 'capsule' ), 'type' => 'url', 'required' => true ),
+			'section1_badge'               => array( 'label' => __( 'Section 1 badge', 'capsule' ), 'type' => 'text' ),
+			'section1_title'               => array( 'label' => __( 'Section 1 title', 'capsule' ), 'type' => 'text', 'required' => true ),
+			'section1_description'         => array( 'label' => __( 'Section 1 description', 'capsule' ), 'type' => 'textarea', 'required' => true ),
+			'section1_cta_text'            => array( 'label' => __( 'Section 1 CTA text', 'capsule' ), 'type' => 'text', 'required' => true ),
+			'feature_card_1_title'         => array( 'label' => __( 'Feature card 1 title', 'capsule' ), 'type' => 'text', 'required' => true ),
+			'feature_card_1_description'   => array( 'label' => __( 'Feature card 1 description', 'capsule' ), 'type' => 'textarea', 'required' => true ),
+			'feature_card_1_image'         => array( 'label' => __( 'Feature card 1 image', 'capsule' ), 'type' => 'image' ),
+			'feature_card_2_title'         => array( 'label' => __( 'Feature card 2 title', 'capsule' ), 'type' => 'text', 'required' => true ),
+			'feature_card_2_description'   => array( 'label' => __( 'Feature card 2 description', 'capsule' ), 'type' => 'textarea', 'required' => true ),
+			'feature_card_2_image'         => array( 'label' => __( 'Feature card 2 image', 'capsule' ), 'type' => 'image' ),
+			'feature_card_3_title'         => array( 'label' => __( 'Feature card 3 title', 'capsule' ), 'type' => 'text', 'required' => true ),
+			'feature_card_3_description'   => array( 'label' => __( 'Feature card 3 description', 'capsule' ), 'type' => 'textarea', 'required' => true ),
+			'feature_card_3_image'         => array( 'label' => __( 'Feature card 3 image', 'capsule' ), 'type' => 'image' ),
+			'extras_title'                 => array( 'label' => __( 'Feature grid section title', 'capsule' ), 'type' => 'text' ),
+			'testimonials_badge'           => array( 'label' => __( 'Testimonials badge', 'capsule' ), 'type' => 'text' ),
+			'testimonials_title'           => array( 'label' => __( 'Testimonials title', 'capsule' ), 'type' => 'text' ),
+			'testimonials_description'     => array( 'label' => __( 'Testimonials description', 'capsule' ), 'type' => 'textarea' ),
+			'process_badge'                => array( 'label' => __( 'Process badge', 'capsule' ), 'type' => 'text' ),
+			'process_title'                => array( 'label' => __( 'Process title', 'capsule' ), 'type' => 'text' ),
+			'process_description'          => array( 'label' => __( 'Process description', 'capsule' ), 'type' => 'textarea' ),
+			'process_cta_primary'          => array( 'label' => __( 'Process primary CTA text', 'capsule' ), 'type' => 'text' ),
+			'process_cta_secondary'        => array( 'label' => __( 'Process secondary CTA text', 'capsule' ), 'type' => 'text' ),
+			'process_video_url'            => array( 'label' => __( 'Process video URL', 'capsule' ), 'type' => 'url' ),
+			'faq_badge'                    => array( 'label' => __( 'FAQ badge', 'capsule' ), 'type' => 'text' ),
+			'faq_title'                    => array( 'label' => __( 'FAQ title', 'capsule' ), 'type' => 'text' ),
+			'faq_description'              => array( 'label' => __( 'FAQ description', 'capsule' ), 'type' => 'textarea' ),
+			'final_cta_title'              => array( 'label' => __( 'Final CTA title', 'capsule' ), 'type' => 'text' ),
+			'final_cta_button_text'        => array( 'label' => __( 'Final CTA button text', 'capsule' ), 'type' => 'text' ),
+			'mobile_sticky_primary_text'   => array( 'label' => __( 'Mobile sticky primary button text', 'capsule' ), 'type' => 'text' ),
+			'mobile_sticky_secondary_text' => array( 'label' => __( 'Mobile sticky secondary button text', 'capsule' ), 'type' => 'text' ),
+			'webhook_url'                  => array( 'label' => __( 'Webhook URL', 'capsule' ), 'type' => 'url', 'required' => true ),
+			'redirect_url'                 => array( 'label' => __( 'Redirect URL after submit', 'capsule' ), 'type' => 'url', 'required' => true ),
+		);
+	}
+}
+
+if ( ! function_exists( 'mbf_register_facebook_ads_meta_box' ) ) {
+	/**
+	 * Register admin meta box for editable Facebook ads page content.
+	 *
+	 * @return void
+	 */
+	function mbf_register_facebook_ads_meta_box() {
+		add_meta_box(
+			'mbf-facebook-ads-content',
+			__( 'Facebook Ads Page Content', 'capsule' ),
+			'mbf_render_facebook_ads_meta_box',
+			'page',
+			'normal',
+			'high'
+		);
+	}
+}
+add_action( 'add_meta_boxes_page', 'mbf_register_facebook_ads_meta_box' );
+
+if ( ! function_exists( 'mbf_render_facebook_ads_meta_box' ) ) {
+	/**
+	 * Render Facebook Ads page content fields.
+	 *
+	 * @param WP_Post $post Current page post.
+	 * @return void
+	 */
+	function mbf_render_facebook_ads_meta_box( $post ) {
+		if ( 'facebook-ads' !== $post->post_name && 'page-facebook-ads-course.php' !== get_page_template_slug( $post->ID ) ) {
+			echo '<p>' . esc_html__( 'These fields are used on the /facebook-ads landing page. Set this page slug to "facebook-ads" or assign the Facebook Ads Course template.', 'capsule' ) . '</p>';
+			return;
+		}
+
+		wp_nonce_field( 'mbf_facebook_ads_content_nonce', 'mbf_facebook_ads_content_nonce' );
+		$fields = mbf_get_facebook_ads_admin_fields();
+
+		echo '<p>' . esc_html__( 'Manage all /facebook-ads page text, media, CTA links, SEO values, webhook URL, and redirect URL here.', 'capsule' ) . '</p>';
+		echo '<table class="form-table"><tbody>';
+
+		foreach ( $fields as $key => $config ) {
+			$value    = get_post_meta( $post->ID, $key, true );
+			$is_image = 'image' === $config['type'];
+			$required = ! empty( $config['required'] ) ? ' required' : '';
+
+			echo '<tr>';
+			echo '<th scope="row"><label for="' . esc_attr( $key ) . '">' . esc_html( $config['label'] ) . '</label></th>';
+			echo '<td>';
+
+			if ( 'textarea' === $config['type'] ) {
+				echo '<textarea class="widefat" rows="3" id="' . esc_attr( $key ) . '" name="mbf_facebook_ads[' . esc_attr( $key ) . ']"' . $required . '>' . esc_textarea( $value ) . '</textarea>';
+			} elseif ( $is_image ) {
+				echo '<input type="url" class="regular-text mbf-image-url" id="' . esc_attr( $key ) . '" name="mbf_facebook_ads[' . esc_attr( $key ) . ']" value="' . esc_attr( $value ) . '" />';
+				echo '<button type="button" class="button mbf-select-image" data-target="' . esc_attr( $key ) . '">' . esc_html__( 'Select Image', 'capsule' ) . '</button>';
+				echo '<p><img src="' . esc_url( $value ) . '" alt="" style="max-width:120px;height:auto;" class="mbf-image-preview" /></p>';
+			} else {
+				$type_attr = in_array( $config['type'], array( 'url', 'text' ), true ) ? $config['type'] : 'text';
+				echo '<input class="regular-text" type="' . esc_attr( $type_attr ) . '" id="' . esc_attr( $key ) . '" name="mbf_facebook_ads[' . esc_attr( $key ) . ']" value="' . esc_attr( $value ) . '"' . $required . ' />';
+			}
+
+			echo '</td>';
+			echo '</tr>';
+		}
+
+		echo '</tbody></table>';
+	}
+}
+
+if ( ! function_exists( 'mbf_facebook_ads_admin_assets' ) ) {
+	/**
+	 * Load media uploader script for facebook ads meta box.
+	 *
+	 * @param string $hook_suffix Current admin page.
+	 * @return void
+	 */
+	function mbf_facebook_ads_admin_assets( $hook_suffix ) {
+		if ( ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ), true ) ) {
+			return;
+		}
+
+		wp_enqueue_media();
+		wp_add_inline_script(
+			'jquery-core',
+			'jQuery(function($){$(".mbf-select-image").on("click", function(e){e.preventDefault(); var button=$(this); var target=$("#"+button.data("target")); var preview=button.closest("td").find(".mbf-image-preview"); var frame=wp.media({title:"Select image",button:{text:"Use image"},multiple:false}); frame.on("select", function(){var attachment=frame.state().get("selection").first().toJSON(); target.val(attachment.url); preview.attr("src", attachment.url);}); frame.open();});});'
+		);
+	}
+}
+add_action( 'admin_enqueue_scripts', 'mbf_facebook_ads_admin_assets' );
+
+if ( ! function_exists( 'mbf_save_facebook_ads_meta_box' ) ) {
+	/**
+	 * Save Facebook ads landing content meta values.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return void
+	 */
+	function mbf_save_facebook_ads_meta_box( $post_id ) {
+		if ( empty( $_POST['mbf_facebook_ads_content_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mbf_facebook_ads_content_nonce'] ) ), 'mbf_facebook_ads_content_nonce' ) ) {
+			return;
+		}
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'edit_page', $post_id ) || empty( $_POST['mbf_facebook_ads'] ) || ! is_array( $_POST['mbf_facebook_ads'] ) ) {
+			return;
+		}
+
+		$fields = mbf_get_facebook_ads_admin_fields();
+		$input  = wp_unslash( $_POST['mbf_facebook_ads'] );
+
+		foreach ( $fields as $key => $config ) {
+			$value = isset( $input[ $key ] ) ? trim( (string) $input[ $key ] ) : '';
+
+			if ( 'url' === $config['type'] || 'image' === $config['type'] ) {
+				$value = '' !== $value ? esc_url_raw( $value ) : '';
+			} elseif ( 'textarea' === $config['type'] ) {
+				$value = sanitize_textarea_field( $value );
+			} else {
+				$value = sanitize_text_field( $value );
+			}
+
+			if ( ! empty( $config['required'] ) && '' === $value ) {
+				continue;
+			}
+
+			if ( '' === $value ) {
+				delete_post_meta( $post_id, $key );
+			} else {
+				update_post_meta( $post_id, $key, $value );
+			}
+		}
+	}
+}
+add_action( 'save_post_page', 'mbf_save_facebook_ads_meta_box' );
+
+/**
+ * ==================================
  * Facebook Ads Landing Route
  * ==================================
  */
