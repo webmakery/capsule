@@ -70,11 +70,41 @@ $defaults = array(
 	'redirect_url'               => '/thank-you-contact',
 );
 
+$default_faq_items = array(
+	array(
+		'question' => 'How quickly will I start seeing results?',
+		'answer'   => 'Most members launch their first optimized campaigns within the first week using our ready-to-use templates, checklists, and ad calculators. Your pace depends on implementation, but every module is designed for fast action.',
+	),
+	array(
+		'question' => 'What if I\'m new to Facebook ads?',
+		'answer'   => 'The curriculum includes beginner-friendly walkthroughs plus advanced modules. We show you how to set up the pixel, structure campaigns, and scale without guesswork—no prior media buying experience required.',
+	),
+	array(
+		'question' => 'Do I get support if I get stuck?',
+		'answer'   => 'Yes. You’ll receive weekly live Q&A access with our instructors and can submit campaign screenshots for feedback. We also provide email support to help troubleshoot creative, targeting, and tracking questions.',
+	),
+	array(
+		'question' => 'Is there a guarantee?',
+		'answer'   => 'If you complete the core modules and templates within 30 days and don’t feel more confident running profitable ads, email us and we’ll work with you to make it right.',
+	),
+	array(
+		'question' => 'Can I access updates in the future?',
+		'answer'   => 'Absolutely. Enrollment includes ongoing updates whenever Meta releases major changes. We refresh the playbooks and templates so your campaigns stay compliant and competitive.',
+	),
+);
+
 $content = array();
 foreach ( $defaults as $key => $default_value ) {
 	$value = isset( $meta[ $key ][0] ) ? $meta[ $key ][0] : '';
 	$value = is_string( $value ) ? trim( $value ) : '';
 	$content[ $key ] = '' !== $value ? $value : $default_value;
+}
+
+$faq_items = $facebook_ads_id ? get_post_meta( $facebook_ads_id, 'faq_items', true ) : array();
+$faq_items = is_array( $faq_items ) ? array_values( $faq_items ) : array();
+
+if ( empty( $faq_items ) ) {
+	$faq_items = $default_faq_items;
 }
 
 $checkout_url = $content['checkout_url'];
@@ -1134,70 +1164,34 @@ $checkout_url = $content['checkout_url'];
                 </div>
 
                 <div class="accordion" id="faqsAccordion">
-                    <div class="accordion-item border rounded-3 mb-3">
-                        <h2 class="accordion-header" id="faqOneHeading">
-                            <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne" aria-expanded="true" aria-controls="faqOne">
-                                How quickly will I start seeing results?
-                            </button>
-                        </h2>
-                        <div id="faqOne" class="accordion-collapse collapse show" aria-labelledby="faqOneHeading" data-bs-parent="#faqsAccordion">
-                            <div class="accordion-body text-secondary">
-                                Most members launch their first optimized campaigns within the first week using our ready-to-use templates, checklists, and ad calculators. Your pace depends on implementation, but every module is designed for fast action.
-                            </div>
-                        </div>
-                    </div>
+					<?php $faq_display_index = 0; ?>
+					<?php foreach ( $faq_items as $faq_item ) : ?>
+						<?php
+						$question = isset( $faq_item['question'] ) ? trim( (string) $faq_item['question'] ) : '';
+						$answer   = isset( $faq_item['answer'] ) ? trim( (string) $faq_item['answer'] ) : '';
+						if ( '' === $question && '' === $answer ) {
+							continue;
+						}
 
-                    <div class="accordion-item border rounded-3 mb-3">
-                        <h2 class="accordion-header" id="faqTwoHeading">
-                            <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo" aria-expanded="false" aria-controls="faqTwo">
-                                What if I'm new to Facebook ads?
+						$faq_heading_id  = 'faqHeading' . ( $faq_display_index + 1 );
+						$faq_collapse_id = 'faqCollapse' . ( $faq_display_index + 1 );
+						$is_first        = 0 === $faq_display_index;
+						$item_class      = 'accordion-item border rounded-3 mb-3';
+						?>
+                    <div class="<?php echo esc_attr( $item_class ); ?>">
+                        <h2 class="accordion-header" id="<?php echo esc_attr( $faq_heading_id ); ?>">
+                            <button class="accordion-button fw-semibold<?php echo $is_first ? '' : ' collapsed'; ?>" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo esc_attr( $faq_collapse_id ); ?>" aria-expanded="<?php echo $is_first ? 'true' : 'false'; ?>" aria-controls="<?php echo esc_attr( $faq_collapse_id ); ?>">
+								<?php echo esc_html( $question ); ?>
                             </button>
                         </h2>
-                        <div id="faqTwo" class="accordion-collapse collapse" aria-labelledby="faqTwoHeading" data-bs-parent="#faqsAccordion">
+                        <div id="<?php echo esc_attr( $faq_collapse_id ); ?>" class="accordion-collapse collapse<?php echo $is_first ? ' show' : ''; ?>" aria-labelledby="<?php echo esc_attr( $faq_heading_id ); ?>" data-bs-parent="#faqsAccordion">
                             <div class="accordion-body text-secondary">
-                                The curriculum includes beginner-friendly walkthroughs plus advanced modules. We show you how to set up the pixel, structure campaigns, and scale without guesswork—no prior media buying experience required.
+								<?php echo esc_html( $answer ); ?>
                             </div>
                         </div>
                     </div>
-
-                    <div class="accordion-item border rounded-3 mb-3">
-                        <h2 class="accordion-header" id="faqThreeHeading">
-                            <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree" aria-expanded="false" aria-controls="faqThree">
-                                Do I get support if I get stuck?
-                            </button>
-                        </h2>
-                        <div id="faqThree" class="accordion-collapse collapse" aria-labelledby="faqThreeHeading" data-bs-parent="#faqsAccordion">
-                            <div class="accordion-body text-secondary">
-                                Yes. You’ll receive weekly live Q&A access with our instructors and can submit campaign screenshots for feedback. We also provide email support to help troubleshoot creative, targeting, and tracking questions.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item border rounded-3 mb-3">
-                        <h2 class="accordion-header" id="faqFourHeading">
-                            <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFour" aria-expanded="false" aria-controls="faqFour">
-                                Is there a guarantee?
-                            </button>
-                        </h2>
-                        <div id="faqFour" class="accordion-collapse collapse" aria-labelledby="faqFourHeading" data-bs-parent="#faqsAccordion">
-                            <div class="accordion-body text-secondary">
-                                If you complete the core modules and templates within 30 days and don’t feel more confident running profitable ads, email us and we’ll work with you to make it right.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item border rounded-3">
-                        <h2 class="accordion-header" id="faqFiveHeading">
-                            <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFive" aria-expanded="false" aria-controls="faqFive">
-                                Can I access updates in the future?
-                            </button>
-                        </h2>
-                        <div id="faqFive" class="accordion-collapse collapse" aria-labelledby="faqFiveHeading" data-bs-parent="#faqsAccordion">
-                            <div class="accordion-body text-secondary">
-                                Absolutely. Enrollment includes ongoing updates whenever Meta releases major changes. We refresh the playbooks and templates so your campaigns stay compliant and competitive.
-                            </div>
-                        </div>
-                    </div>
+					<?php $faq_display_index++; ?>
+					<?php endforeach; ?>
                 </div>
             </div>
         </div>
