@@ -164,3 +164,94 @@ if ( ! function_exists( 'mbf_replace_wpcf7_button' ) ) {
 	}
 }
 add_filter( 'wpcf7_form_elements', 'mbf_replace_wpcf7_button' );
+
+/**
+ * ==================================
+ * Facebook Ads Landing Route
+ * ==================================
+ */
+
+if ( ! function_exists( 'mbf_register_facebook_ads_route' ) ) {
+	/**
+	 * Register a public route for the Facebook Ads landing page.
+	 *
+	 * @return void
+	 */
+	function mbf_register_facebook_ads_route() {
+		add_rewrite_rule( '^facebook-ads/?$', 'index.php?capsule_facebook_ads=1', 'top' );
+	}
+}
+add_action( 'init', 'mbf_register_facebook_ads_route' );
+
+if ( ! function_exists( 'mbf_register_facebook_ads_query_var' ) ) {
+	/**
+	 * Register query vars used by the custom Facebook Ads route.
+	 *
+	 * @param array $vars Existing public query vars.
+	 * @return array
+	 */
+	function mbf_register_facebook_ads_query_var( $vars ) {
+		$vars[] = 'capsule_facebook_ads';
+		return $vars;
+	}
+}
+add_filter( 'query_vars', 'mbf_register_facebook_ads_query_var' );
+
+if ( ! function_exists( 'mbf_facebook_ads_template' ) ) {
+	/**
+	 * Load the Facebook Ads landing template when visiting /facebook-ads.
+	 *
+	 * @param string $template Default resolved template.
+	 * @return string
+	 */
+	function mbf_facebook_ads_template( $template ) {
+		if ( ! get_query_var( 'capsule_facebook_ads' ) ) {
+			return $template;
+		}
+
+		if ( is_admin() ) {
+			return $template;
+		}
+
+		$landing_template = locate_template( 'page-facebook-ads-course.php' );
+		if ( ! empty( $landing_template ) ) {
+			status_header( 200 );
+			return $landing_template;
+		}
+
+		return $template;
+	}
+}
+add_filter( 'template_include', 'mbf_facebook_ads_template', 99 );
+
+if ( ! function_exists( 'mbf_flush_rewrite_rules_on_theme_switch' ) ) {
+	/**
+	 * Flush rewrite rules when switching to this theme.
+	 *
+	 * @return void
+	 */
+	function mbf_flush_rewrite_rules_on_theme_switch() {
+		mbf_register_facebook_ads_route();
+		flush_rewrite_rules();
+	}
+}
+add_action( 'after_switch_theme', 'mbf_flush_rewrite_rules_on_theme_switch' );
+
+if ( ! function_exists( 'mbf_maybe_flush_rewrite_rules' ) ) {
+	/**
+	 * Flush rewrite rules once after deployment updates.
+	 *
+	 * @return void
+	 */
+	function mbf_maybe_flush_rewrite_rules() {
+		$flush_flag = 'capsule_facebook_ads_route_flushed';
+		if ( get_option( $flush_flag ) ) {
+			return;
+		}
+
+		mbf_register_facebook_ads_route();
+		flush_rewrite_rules( false );
+		update_option( $flush_flag, '1', false );
+	}
+}
+add_action( 'init', 'mbf_maybe_flush_rewrite_rules', 20 );
