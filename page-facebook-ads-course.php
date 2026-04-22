@@ -207,10 +207,29 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
         width: 13px;
         height: 13px;
     }
-    body.page-template-page-facebook-ads-course .btn.btn-lg {
-        --bs-btn-padding-y: 0.58rem;
+    body.page-template-page-facebook-ads-course .btn.btn-lg,
+    body.page-template-facebook-ads-course .btn.btn-lg {
+        --bs-btn-padding-y: 0.62rem;
         --bs-btn-padding-x: 1rem;
         --bs-btn-font-size: 0.98rem;
+        border-radius: 8px;
+        font-weight: 600;
+        line-height: 1.25;
+        border: 1px solid #111827;
+        background: #111827;
+        color: #ffffff;
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.16);
+        transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+    }
+    body.page-template-page-facebook-ads-course .btn.btn-lg:hover,
+    body.page-template-facebook-ads-course .btn.btn-lg:hover,
+    body.page-template-page-facebook-ads-course .btn.btn-lg:focus-visible,
+    body.page-template-facebook-ads-course .btn.btn-lg:focus-visible {
+        background: #0f172a;
+        border-color: #0f172a;
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.2);
     }
     body.page-template-page-facebook-ads-course h1.fw-semibold {
         font-size: clamp(1.9rem, 1.3rem + 1.9vw, 3.05rem);
@@ -585,7 +604,7 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
                     </a>
 
                     <a href="#get-free-trial" class="btn btn-light border btn-lg d-flex align-items-center justify-content-between w-100" data-trial-open style="max-width:260px;">
-                        <span class="text-dark">Preview a Free Lesson</span>
+                        <span>Preview a Free Lesson</span>
                         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4">
                             <path d="M4 2l6 5-6 5" />
                         </svg>
@@ -1172,7 +1191,7 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
             <a href="<?php echo esc_url( $checkout_url ); ?>" class="btn btn-dark btn-lg w-100">
                 Order Now 25$
             </a>
-            <a href="#get-free-trial" class="btn btn-light border btn-lg w-100 text-dark" data-trial-open>
+            <a href="#get-free-trial" class="btn btn-light border btn-lg w-100" data-trial-open>
                 Free Lesson
             </a>
         </div>
