@@ -64,6 +64,22 @@ $defaults = array(
 	'feature_card_3_description' => 'Use budget and bid calculators, tracking templates, and retargeting scripts to scale spend confidently and keep pipelines full.',
 	'feature_card_3_image'       => 'https://cdn.webmakerr.com/website/facebook-ads-2.png',
 	'extras_title'               => '...plus everything needed for a profitable Facebook ads system',
+	'extras_item_1_text'         => 'Proven hooks & headlines',
+	'extras_item_1_icon'         => '',
+	'extras_item_2_text'         => 'Budget & bid calculators',
+	'extras_item_2_icon'         => '',
+	'extras_item_3_text'         => 'Retargeting scripts that convert',
+	'extras_item_3_icon'         => '',
+	'extras_item_4_text'         => 'Plug-and-play landing pages',
+	'extras_item_4_icon'         => '',
+	'extras_item_5_text'         => 'Data-backed testing plan',
+	'extras_item_5_icon'         => '',
+	'extras_item_6_text'         => 'Checklists for every launch',
+	'extras_item_6_icon'         => '',
+	'extras_item_7_text'         => 'Creative and offer swipe files',
+	'extras_item_7_icon'         => '',
+	'extras_item_8_text'         => 'Student results library',
+	'extras_item_8_icon'         => '',
 	'testimonials_badge'         => 'Student results',
 	'testimonials_title'         => 'Marketers turning ads into revenue',
 	'testimonials_description'   => 'See how the Facebook Ads course helps founders and growth teams launch profitable campaigns without guesswork.',
@@ -94,6 +110,7 @@ $defaults = array(
 	'mobile_sticky_secondary_text' => 'Free Lesson',
 	'webhook_url'                => 'https://roma.webmakerr.com/?fluentcrm=1&route=contact&hash=f4c52bd8-9874-46f6-8b57-2b5759d41a16',
 	'redirect_url'               => '/thank-you-contact',
+	'disclaimer_text'            => 'Important Disclaimer: This training is for educational purposes only and does not guarantee results. This page is not endorsed by or affiliated with Meta Platforms, Inc. Advertisers are responsible for following all Meta Advertising Policies.',
 );
 
 $default_faq_items = array(
@@ -1030,25 +1047,55 @@ $testimonials = array(
                 '<svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 42l8-18 8 10 10-18 10 26"></path><path d="M14 52h36"></path><path d="M22 22h-6"></path><path d="M46 18h-8"></path><circle cx="24" cy="50" r="2"></circle><circle cx="40" cy="50" r="2"></circle><path d="M18 12h12l-2 6h-8z"></path><path d="M34 34l6 6"></path></svg>',
             ];
 
-            $labels = [
-                'Proven hooks & headlines',
-                'Budget & bid calculators',
-                'Retargeting scripts that convert',
-                'Plug-and-play landing pages',
-                'Data-backed testing plan',
-                'Checklists for every launch',
-                'Creative and offer swipe files',
-                'Student results library'
-            ];
+            $extra_items = array(
+				array(
+					'label' => $content['extras_item_1_text'],
+					'icon'  => $content['extras_item_1_icon'],
+				),
+				array(
+					'label' => $content['extras_item_2_text'],
+					'icon'  => $content['extras_item_2_icon'],
+				),
+				array(
+					'label' => $content['extras_item_3_text'],
+					'icon'  => $content['extras_item_3_icon'],
+				),
+				array(
+					'label' => $content['extras_item_4_text'],
+					'icon'  => $content['extras_item_4_icon'],
+				),
+				array(
+					'label' => $content['extras_item_5_text'],
+					'icon'  => $content['extras_item_5_icon'],
+				),
+				array(
+					'label' => $content['extras_item_6_text'],
+					'icon'  => $content['extras_item_6_icon'],
+				),
+				array(
+					'label' => $content['extras_item_7_text'],
+					'icon'  => $content['extras_item_7_icon'],
+				),
+				array(
+					'label' => $content['extras_item_8_text'],
+					'icon'  => $content['extras_item_8_icon'],
+				),
+			);
 
-            foreach ($labels as $index => $label):
+            foreach ( $extra_items as $index => $item ) :
+                $label = isset( $item['label'] ) ? (string) $item['label'] : '';
+                $icon  = isset( $item['icon'] ) ? (string) $item['icon'] : '';
                 ?>
                 <div class="col-6 col-md-3 d-flex justify-content-center">
                     <div class="feature-card more-feature-card bg-white border rounded-4 shadow-sm d-flex flex-column align-items-center justify-content-center p-3">
                         <div class="feature-icon-box d-flex align-items-center justify-content-center position-relative mb-3">
-                            <?php echo $icons[$index]; ?>
+                            <?php if ( '' !== $icon ) : ?>
+								<img src="<?php echo esc_url( $icon ); ?>" alt="<?php echo esc_attr( $label ); ?>" class="img-fluid" style="max-width: 56px; max-height: 56px;" />
+							<?php else : ?>
+								<?php echo $icons[ $index ]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php endif; ?>
                         </div>
-                        <p class="fw-medium text-dark small mb-0"><?php echo $label; ?></p>
+                        <p class="fw-medium text-dark small mb-0"><?php echo esc_html( $label ); ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -1427,7 +1474,7 @@ $testimonials = array(
 
 <section class="wmk-disclaimer" style="padding:20px 0; font-size:11px; color:#777; line-height:1.5;">
     <div class="container">
-        <p>Important Disclaimer: This training is for educational purposes only and does not guarantee results. This page is not endorsed by or affiliated with Meta Platforms, Inc. Advertisers are responsible for following all Meta Advertising Policies.</p>
+        <p><?php echo esc_html( $content['disclaimer_text'] ); ?></p>
     </div>
 </section>
 
