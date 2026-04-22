@@ -22,7 +22,15 @@ wp_enqueue_script(
 
 $template_assets = get_theme_file_uri( 'assets/images/facebook-ads-course' );
 $theme_dir       = get_theme_file_uri();
-$facebook_ads_id = function_exists( 'mbf_get_facebook_ads_page_id' ) ? mbf_get_facebook_ads_page_id() : 0;
+$queried_page_id = get_queried_object_id();
+$facebook_ads_id = 0;
+
+if ( $queried_page_id && 'page' === get_post_type( $queried_page_id ) ) {
+	$facebook_ads_id = (int) $queried_page_id;
+} elseif ( function_exists( 'mbf_get_facebook_ads_page_id' ) ) {
+	$facebook_ads_id = mbf_get_facebook_ads_page_id();
+}
+
 $meta            = $facebook_ads_id ? get_post_meta( $facebook_ads_id ) : array();
 
 $defaults = array(
