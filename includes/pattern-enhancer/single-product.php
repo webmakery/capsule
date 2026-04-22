@@ -13,6 +13,9 @@ return array(
 	'capsule/mbf-single-product-standard' => array(
 		'class'    => 'mbf-single-product',
 	),
+	'capsule/mbf-single-product-standard-fluentcart' => array(
+		'class'    => 'mbf-single-product',
+	),
 	'capsule/mbf-single-product-reviews' => array(
 		'class'    => 'mbf-single-product-reviews',
 	),
