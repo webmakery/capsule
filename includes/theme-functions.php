@@ -255,3 +255,27 @@ if ( ! function_exists( 'mbf_maybe_flush_rewrite_rules' ) ) {
 	}
 }
 add_action( 'init', 'mbf_maybe_flush_rewrite_rules', 20 );
+
+/**
+ * ==================================
+ * Classic Editor for Specific Types
+ * ==================================
+ */
+
+if ( ! function_exists( 'mbf_disable_block_editor_for_selected_post_types' ) ) {
+	/**
+	 * Disable the block editor for blog posts and pages only.
+	 *
+	 * @param bool   $use_block_editor Whether the block editor should be used.
+	 * @param string $post_type        Current post type being checked.
+	 * @return bool
+	 */
+	function mbf_disable_block_editor_for_selected_post_types( $use_block_editor, $post_type ) {
+		if ( in_array( $post_type, array( 'post', 'page' ), true ) ) {
+			return false;
+		}
+
+		return $use_block_editor;
+	}
+}
+add_filter( 'use_block_editor_for_post_type', 'mbf_disable_block_editor_for_selected_post_types', 10, 2 );
