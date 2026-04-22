@@ -142,11 +142,11 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
             radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.08), transparent 40%);
     }
     .hero-animation-shell {
-        min-height: 260px;
+        min-height: 250px;
         background: linear-gradient(135deg, #1877F2 50%, #000000 50%);
         border-radius: 4px;
         overflow: hidden;
-        padding: 24px;
+        padding: 14px;
         display: flex;
         align-items: center;
     }
@@ -180,13 +180,46 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
         color: #0f172a;
     }
     .hero-title {
-        font-size: clamp(2rem, 1.5rem + 2vw, 3.4rem);
+        font-size: clamp(1.9rem, 1.3rem + 1.9vw, 3.05rem);
+        letter-spacing: -0.02em;
+        max-width: 19ch;
     }
     .hero-info-row {
         gap: 1rem;
     }
     .hero-pill {
         white-space: nowrap;
+    }
+    .hero-copy p {
+        max-width: 60ch;
+    }
+    .hero-actions .btn {
+        font-size: 0.98rem;
+        padding: 0.62rem 0.95rem;
+        border-radius: 8px;
+        line-height: 1.25;
+    }
+    .hero-actions .btn img {
+        width: 16px;
+        height: 16px;
+    }
+    .hero-actions .btn svg {
+        width: 13px;
+        height: 13px;
+    }
+    body.page-template-page-facebook-ads-course .btn.btn-lg {
+        --bs-btn-padding-y: 0.58rem;
+        --bs-btn-padding-x: 1rem;
+        --bs-btn-font-size: 0.98rem;
+    }
+    body.page-template-page-facebook-ads-course h1.fw-semibold {
+        font-size: clamp(1.9rem, 1.3rem + 1.9vw, 3.05rem);
+    }
+    body.page-template-page-facebook-ads-course h2.fw-semibold {
+        font-size: clamp(1.45rem, 1.2rem + 0.95vw, 2rem);
+    }
+    body.page-template-page-facebook-ads-course h3.fw-semibold {
+        font-size: clamp(1.2rem, 1.1rem + 0.55vw, 1.65rem);
     }
     .feature-card {
         width: 180px;
@@ -242,7 +275,7 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
 
         .hero-actions .btn {
             width: 100%;
-            max-width: 260px;
+            max-width: 242px;
         }
 
         .hero-actions .btn + .btn {
@@ -280,7 +313,7 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
             text-align: center;
         }
         .hero-animation-shell {
-            padding: 0;
+            padding: 12px;
             min-height: 200px;
         }
         .hero-feature-card {
@@ -301,7 +334,7 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
         }
         .hero-actions .btn {
             width: 100%;
-            max-width: 320px;
+            max-width: 298px;
         }
         .hero-actions .btn + .btn {
             margin-top: 0 !important;
