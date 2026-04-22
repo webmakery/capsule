@@ -687,13 +687,13 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
                 <div class="trial-modal__form mt-3">
                     <form id="freeTrialForm" class="needs-validation" novalidate>
                         <div class="mb-3">
-                            <label for="trialName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="trialName" name="trialName" placeholder="Jane Doe" required>
+                            <label for="trialName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="trialName" name="first_name" placeholder="Jane" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="trialEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="trialEmail" name="trialEmail" placeholder="you@company.com" required>
+                            <input type="email" class="form-control" id="trialEmail" name="email" placeholder="you@company.com" required>
                         </div>
 
                         <button type="submit" class="btn btn-dark btn-lg w-100 d-flex justify-content-center align-items-center gap-2" data-trial-submit>
@@ -1189,7 +1189,7 @@ $checkout_url    = 'https://webmakerr.com/?fluent-cart=instant_checkout&item_id=
         var errorAlert = modalBackdrop ? modalBackdrop.querySelector('[data-trial-error]') : null;
         var spinner = modalBackdrop ? modalBackdrop.querySelector('[data-trial-spinner]') : null;
         var submitBtn = modalBackdrop ? modalBackdrop.querySelector('[data-trial-submit]') : null;
-        var webhookUrl = 'https://webmakerr.com/?fluentcrm=1&route=contact&hash=f4146b0f-34b7-4677-8b3c-9628b056387b';
+        var webhookUrl = 'https://roma.webmakerr.com/?fluentcrm=1&route=contact&hash=f4c52bd8-9874-46f6-8b57-2b5759d41a16';
 
         if (!modalBackdrop || !form || !nameInput || !emailInput) {
             return;
