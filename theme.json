@@ -19,11 +19,6 @@
       "name": "template-transparent-header",
       "title": "Page Transparent Header",
       "postTypes": ["page"]
-    },
-    {
-      "name": "template-facebook-ads-course",
-      "title": "Facebook Ads Course",
-      "postTypes": ["page"]
     }
   ],
   "settings": {
@@ -1174,16 +1169,6 @@
       "area": "footer",
       "name": "footer",
       "title": "Footer"
-    },
-    {
-      "area": "header",
-      "name": "facebook-ads-course-header",
-      "title": "Facebook Ads Course Header"
-    },
-    {
-      "area": "footer",
-      "name": "facebook-ads-course-footer",
-      "title": "Facebook Ads Course Footer"
     }
   ],
   "version": 3,
