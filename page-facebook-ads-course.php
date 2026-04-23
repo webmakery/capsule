@@ -375,6 +375,28 @@ $testimonials = array(
     body.page-template-page-facebook-ads-course h3.fw-semibold {
         font-size: clamp(1.2rem, 1.1rem + 0.55vw, 1.65rem);
     }
+    body.page-template-facebook-ads-course > header.wp-block-template-part .wp-block-group.alignwide,
+    body.page-template-page-facebook-ads-course > header.wp-block-template-part .wp-block-group.alignwide {
+        padding-top: var(--wp--preset--spacing--40) !important;
+        padding-bottom: var(--wp--preset--spacing--40) !important;
+    }
+    body.page-template-facebook-ads-course section.py-5,
+    body.page-template-page-facebook-ads-course section.py-5 {
+        padding-top: 2.25rem !important;
+        padding-bottom: 2.25rem !important;
+    }
+    body.page-template-facebook-ads-course section.pt-5,
+    body.page-template-page-facebook-ads-course section.pt-5 {
+        padding-top: 2.25rem !important;
+    }
+    body.page-template-facebook-ads-course section.pb-5,
+    body.page-template-page-facebook-ads-course section.pb-5 {
+        padding-bottom: 2.25rem !important;
+    }
+    body.page-template-facebook-ads-course section.py-5 .mt-5,
+    body.page-template-page-facebook-ads-course section.py-5 .mt-5 {
+        margin-top: 2rem !important;
+    }
     .feature-card {
         width: 180px;
         height: 180px;
